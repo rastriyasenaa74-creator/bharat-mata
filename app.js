@@ -1,5 +1,5 @@
 
-const SCHOOL_API_URL = ""; // After deploying Google Apps Script, paste its Web App URL here.
+const SCHOOL_API_URL = "https://script.google.com/macros/s/AKfycbxK_GrEb6VlupNxZlL6cVBZK-N2ALDwdy0OKMOCW74tuJjMZnAYmL-16wYu78QY_liZ/exec"; // After deploying Google Apps Script, paste its Web App URL here.
 const $=s=>document.querySelector(s);
 function esc(x){return String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function showMsg(el,text,error=false){if(!el)return;el.textContent=text;el.className="alert"+(error?" error":"");el.hidden=false}

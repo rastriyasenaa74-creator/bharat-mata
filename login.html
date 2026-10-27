@@ -1,1 +1,308 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Portal Login | Bharat Mata Inter College</title><link rel="stylesheet" href="styles.css"></head><body><div class="top"><div class="container">📍 [Add official school address] &nbsp; · &nbsp; ☎ [Add official phone number]</div></div><header class="nav"><div class="container navin"><a class="brand" href="index.html"><span class="logo">BM</span><span>Bharat Mata<br>Inter College</span></a><button class="menu" type="button">☰ Menu</button><nav class="links"><a href="index.html">Home</a><a href="about.html">About</a><a href="academics.html">Academics</a><a href="admissions.html">Admissions</a><a href="results.html">Results</a><a href="notices.html">Notices</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a><a href="login.html">Login</a></nav></div></header><section class="pagehead"><div class="container"><h1>School Portal Login</h1><p>One login page for authorised school users.</p></div></section><section class="section"><div class="container center card"><form id="login-form"><div class="field"><label>Username</label><input name="username" required autocomplete="username"></div><div class="field"><label>Password</label><input type="password" name="password" required autocomplete="current-password"></div><div class="field"><label>Login as</label><select name="role" required><option value="">Choose role</option><option value="admin">Admin</option><option value="teacher">Teacher</option><option value="student">Student</option><option value="parent">Parent</option></select></div><div class="spacer"></div><button type="submit">Secure Login</button><div id="login-message" class="alert" hidden></div></form><p class="small muted">Actual authentication is not enabled in the local preview. Do not enter a real password here.</p></div></section><footer class="footer"><div class="container footergrid"><div><b>Bharat Mata Inter College</b><p>Education · Discipline · Progress</p><small>Replace bracketed contact details with verified school information.</small></div><div><b>Quick Links</b><p><a href="admissions.html">Admissions</a></p><p><a href="notices.html">Notices</a></p><p><a href="login.html">Portal Login</a></p></div><div><b>Contact</b><p>[Official school address]</p><p>[Official phone number]</p><p>[Official email]</p></div></div><div class="container small">© <span id="year"></span> Bharat Mata Inter College. All rights reserved.</div></footer><script src="app.js"></script></body></html>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portal Login | Bharat Mata Inter College</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f6fb;
+      color: #102e55;
+    }
+
+    .top {
+      background: #102e55;
+      color: white;
+      padding: 12px 5%;
+      font-size: 13px;
+    }
+
+    header {
+      background: white;
+      padding: 18px 5%;
+      border-bottom: 1px solid #dbe4f0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #102e55;
+      font-size: 19px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .logo {
+      background: #102e55;
+      color: white;
+      border: 3px solid #f4c77b;
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    .pagehead {
+      text-align: center;
+      padding: 30px 15px 10px;
+    }
+
+    .pagehead h1 {
+      margin-bottom: 8px;
+    }
+
+    .card {
+      width: min(92%, 650px);
+      margin: 20px auto 60px;
+      padding: 30px;
+      background: white;
+      border: 1px solid #d9e3f1;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(16, 46, 85, .05);
+    }
+
+    .field { margin-bottom: 16px; }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 14px 12px;
+      border: 1px solid #cbd7e8;
+      border-radius: 9px;
+      font-size: 15px;
+      background: white;
+    }
+
+    input:focus, select:focus {
+      outline: 2px solid #9bbce9;
+      border-color: #102e55;
+    }
+
+    button {
+      background: #102e55;
+      color: white;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 9px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    .alert {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 9px;
+      overflow-wrap: anywhere;
+    }
+
+    .error {
+      background: #fff0f0;
+      color: #b42318;
+    }
+
+    .success {
+      background: #eaf8ef;
+      color: #176b35;
+    }
+
+    .muted {
+      color: #64748b;
+      font-size: 12px;
+      line-height: 1.6;
+      margin-top: 20px;
+    }
+
+    footer {
+      padding: 25px 5%;
+      background: white;
+      border-top: 1px solid #dbe4f0;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top">
+    Bharat Mata Inter College
+  </div>
+
+  <header>
+    <a class="brand" href="<?= ScriptApp.getService().getUrl() ?>?page=index">
+      <span class="logo">BM</span>
+      <span>Bharat Mata<br>Inter College</span>
+    </a>
+  </header>
+
+  <section class="pagehead">
+    <h1>School Portal Login</h1>
+    <p>Sign in to your authorised school account.</p>
+  </section>
+
+  <main class="card">
+    <form id="login-form">
+      <div class="field">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          autocomplete="username"
+          required
+          maxlength="100"
+        >
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          required
+          maxlength="256"
+        >
+      </div>
+
+      <div class="field">
+        <label for="role">Login as</label>
+        <select id="role" name="role" required>
+          <option value="">Choose role</option>
+          <option value="admin">Admin</option>
+          <option value="teacher">Teacher</option>
+          <option value="student">Student</option>
+          <option value="parent">Parent</option>
+        </select>
+      </div>
+
+      <button id="login-button" type="submit">Secure Login</button>
+
+      <div id="login-message" class="alert" role="alert" hidden></div>
+    </form>
+
+    <p class="muted">
+      Use the username and password created by the school administrator.
+      Never share your password with anyone.
+    </p>
+  </main>
+
+  <footer>
+    <strong>Bharat Mata Inter College</strong><br>
+    Education · Discipline · Progress<br>
+    &copy; <span id="year"></span> Bharat Mata Inter College
+  </footer>
+
+  <script>
+    const APP_URL = '<?= ScriptApp.getService().getUrl() ?>';
+
+    const form = document.getElementById('login-form');
+    const button = document.getElementById('login-button');
+    const message = document.getElementById('login-message');
+
+    document.getElementById('year').textContent =
+      new Date().getFullYear();
+
+    function showMessage(text, type) {
+      message.textContent = text;
+      message.className = 'alert ' + type;
+      message.hidden = false;
+    }
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      const role = document.getElementById('role').value;
+
+      if (!username || !password || !role) {
+        showMessage('Please fill in all fields.', 'error');
+        return;
+      }
+
+      if (
+        typeof google === 'undefined' ||
+        !google.script ||
+        !google.script.run
+      ) {
+        showMessage(
+          'Backend connection unavailable. Open the deployed Google Apps Script Web App URL, not the local HTML file.',
+          'error'
+        );
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = 'Signing in...';
+      message.hidden = true;
+
+      google.script.run
+        .withSuccessHandler(function(result) {
+          button.disabled = false;
+          button.textContent = 'Secure Login';
+
+          if (!result || !result.success || !result.token) {
+            showMessage('Login failed. Please try again.', 'error');
+            return;
+          }
+
+          try {
+            sessionStorage.setItem('bmic_session_token', result.token);
+            sessionStorage.setItem(
+              'bmic_user',
+              JSON.stringify(result.user)
+            );
+          } catch (e) {
+            showMessage(
+              'Could not save your login session in this browser.',
+              'error'
+            );
+            return;
+          }
+
+          showMessage('Login successful. Opening your dashboard...', 'success');
+
+          const allowedPages = ['admin', 'teacher', 'student', 'parent'];
+          const destination = allowedPages.includes(result.redirect)
+            ? result.redirect
+            : result.user.role;
+
+          window.top.location.href =
+            APP_URL + '?page=' + encodeURIComponent(destination);
+        })
+        .withFailureHandler(function(error) {
+          button.disabled = false;
+          button.textContent = 'Secure Login';
+
+          showMessage(
+            error && error.message
+              ? error.message
+              : 'Login failed. Please check your credentials and try again.',
+            'error'
+          );
+        })
+        .login(username, password, role);
+    });
+  </script>
+</body>
+</html>
+```
